@@ -95,4 +95,4 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'rkdigitalfashionstudio@gmail.com'
 EMAIL_HOST_PASSWORD = 'kjzlpxriycgljcls'
-DEFAULT_FROM_EMAIL = 'RK Studio rkdigitalfashionstudio@gmail.com'
+DEFAULT_FROM_EMAIL = "RK Studio <rkdigitalfashionstudio@gmail.com>"
