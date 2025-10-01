@@ -12,7 +12,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-for-local")
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 # Hosts allowed in production
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost").split(",")
+ALLOWED_HOSTS = ['.onrender.com', 'rkfashionstudio.publicvm.com']
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -22,7 +23,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'booking',  # Our booking app
+    'booking',
+    'Dashboard','Mainapp',
 ]
 
 MIDDLEWARE = [
