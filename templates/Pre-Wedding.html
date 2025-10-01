@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+
+{% block title %}Pre-Wedding Shoot | RK Studio{% endblock %}
+
+{% block styles %}
+<style>
+    body {
+        background-color: #111;
+        color: #f0f0f0; 
+    }
+
+    .service-header {
+        text-align: center;
+        padding: 100px 20px 60px 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    .service-header h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 900;
+        color: #B22222; 
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .service-header p {
+        font-size: 1.1rem;
+        color: #ccc;
+        line-height: 1.8;
+    }
+
+    .pre-wedding-hero-video {
+        width: 70%;
+        height: 60vh;
+        object-fit: cover;
+        margin: 40px auto; /* centers horizontally */
+        border-top: 2px solid #B22222;
+        border-bottom: 2px solid #B22222;
+        position: relative;
+        z-index: 2;
+        display: block; /* ensures margin auto works */
+    }
+
+    /* Tablet */
+    @media (max-width: 768px) {
+        .pre-wedding-hero-video {
+            width: 90%;
+            height: auto; /* let it shrink naturally */
+        }
+    }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+        .pre-wedding-hero-video {
+            width: 100%;
+            height: auto;
+        }
+    }
+    
+    .filmstrip-gallery {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        height: 90vh; 
+        background-color: #000;
+        cursor: grab;
+        position: relative;
+        z-index: 2;
+        border-top: 2px solid #B22222; 
+        border-bottom: 2px solid #B22222;
+        margin-bottom: 50px; 
+    }
+    .filmstrip-gallery:active {
+        cursor: grabbing;
+    }
+
+    .filmstrip-gallery img,
+    .filmstrip-gallery video {
+        height: 100%;
+        width: auto;
+        object-fit: cover;
+        scroll-snap-align: center;
+        flex-shrink: 0; 
+    }
+
+    .filmstrip-gallery::-webkit-scrollbar {
+        height: 8px;
+    }
+    .filmstrip-gallery::-webkit-scrollbar-track {
+        background: #000;
+    }
+    .filmstrip-gallery::-webkit-scrollbar-thumb {
+        background-color: #B22222;
+        border-radius: 10px;
+    }
+
+    .sparkle-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .sparkle {
+        position: absolute;
+        background-color: #DC143C; 
+        border-radius: 50%;
+        opacity: 0;
+        animation: sparkle-animation 15s linear infinite;
+    }
+
+    @keyframes sparkle-animation {
+        0% {
+            transform: translateY(0) scale(0);
+            opacity: 0.5;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) scale(1);
+            opacity: 0;
+        }
+    }
+    .booking-btn {
+    color: white;
+    background-color: #ff3b69; /* Base pink */
+    padding: 22px 45px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 25px;
+    display: inline-block; /* Always keeps button shape */
+    text-align: center;
+    transition: background-color 0.3s ease; /* Only animate bg, not padding/size */
+    min-width: 250px;
+    box-sizing: border-box; /* Prevents shrinking */
+}
+
+/* Hover */
+.booking-btn:hover {
+    background-color: #ff1a4d; /* Darker pink */
+    color: white;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .booking-btn {
+        font-size: 20px;
+        padding: 18px 35px;
+        min-width: 200px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .booking-btn {
+        font-size: 16px;
+        padding: 14px 25px;
+        min-width: 160px;
+    }
+}
+
+    .sparkle:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; width: 3px; height: 3px; }
+    .sparkle:nth-child(2) { top: 80%; left: 30%; animation-delay: -3s; width: 1px; height: 1px; }
+    .sparkle:nth-child(3) { top: 50%; left: 90%; animation-delay: -8s; width: 2px; height: 2px; }
+    .sparkle:nth-child(4) { top: 90%; left: 70%; animation-delay: -5s; width: 3px; height: 3px; }
+    .sparkle:nth-child(5) { top: 10%; left: 60%; animation-delay: -12s; width: 1px; height: 1px; }
+    .sparkle:nth-child(6) { top: 40%; left: 5%; animation-delay: -1s; width: 2px; height: 2px; }
+    .sparkle:nth-child(7) { top: 60%; left: 50%; animation-delay: -10s; width: 3px; height: 3px; }
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="sparkle-container">
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+</div>
+
+<main>
+    <div class="service-header">
+        <h1>Pre-Wedding Shoot</h1>
+        <p>
+            The journey to forever begins with a spark, and a pre-wedding shoot beautifully captures that initial magic. At RK Studio, we craft cinematic pre-wedding experiences, telling your unique love story against stunning backdrops. Whether it's a playful chase, a romantic embrace, or a serene moment of connection, we bring your vision to life, creating breathtaking visuals that foreshadow the grandeur of your wedding day. Let's capture the essence of your courtship.
+        </p>
+    </div>
+
+    <video class="pre-wedding-hero-video" autoplay loop muted playsinline alt="Romantic Pre-Wedding Couple Video">
+        <source src="https://files.catbox.moe/rjfo7q.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="filmstrip-gallery">
+        <img src="https://i.ibb.co/jPttNC0j/1.png" alt="Pre-Wedding Couple on Beach">
+        <img src="https://i.ibb.co/tTQmhQz5/2.png" alt="Couple in Scenic Landscape">
+        <img src="https://thepicturevilla.com/assets/images/pre_wedding_banner.jpg" alt="Candid Pre-Wedding Moment">
+        <img src="https://i.ibb.co/LhH41Pjr/3.png" alt="Romantic Pre-Wedding Pose">
+        <img src="https://i.ibb.co/NMPjN04/4.png" alt="Couple Silhouetted at Sunset">
+        <img src="https://i.ibb.co/GvjRmJH0/5.png" alt="Playful Pre-Wedding Shot">
+    </div>
+<div class="container">
+    <div style="text-align: center; margin-top: 100px; margin-bottom: 100px;">
+        <a href="/booking" class="booking-btn"
+           onmouseover="this.style.backgroundColor='#ff1a4d';"
+           onmouseout="this.style.backgroundColor='#ff3b69';">
+            BOOK YOUR PHOTOSHOOT
+        </a>
+    </div>
+</div>
+</main>
+{% endblock %}

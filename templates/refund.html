@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<style>
+    .policy-container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 20px;
+        font-size: 14px;       
+        color: #888888; 
+        line-height: 1.8;
+    }
+
+    .policy-container h1,
+    .policy-container h2,
+    .policy-container h3 {
+        color: #ffffff;    
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+
+    .policy-container p, 
+    .policy-container li {
+        margin-bottom: 15px;
+    }
+
+    .policy-container ul {
+        list-style-type: disc;
+        margin-left: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="policy-container">
+    <h1 style="font-size:35px; text-align:center;">REFUND POLICY</h1>
+
+    <p>At KS Studio, we strive to provide the best photography services for our clients. Refunds are handled carefully to ensure fairness and transparency. Please read this policy to understand the conditions under which refunds may be issued.</p>
+
+    <h2>Booking Cancellations</h2>
+    <p>Clients may request to cancel a booked session. Refunds for cancellations are only provided under the following conditions:</p>
+    <ul>
+        <li>If the session is canceled by KS Studio due to unforeseen circumstances, a full refund will be issued.</li>
+        <li>If a client cancels the booking at least 48 hours prior to the scheduled session, a partial or full refund may be issued based on the situation.</li>
+    </ul>
+
+    <h2>No Refunds for Completed Sessions</h2>
+    <p>No refunds will be provided for sessions that have already been completed. All sales for completed services are final.</p>
+
+    <h2>Rescheduling</h2>
+    <p>Clients are encouraged to contact KS Studio to reschedule a session if they are unable to attend at the originally scheduled time. While rescheduling is preferred over refunds, any refund request will be evaluated based on the circumstances and notice provided.</p>
+
+    <h2>How to Request a Refund</h2>
+    <p>To request a refund, clients should contact us at:</p>
+    <ul>
+        <li>Email: rkdigitalfashionstudio@gmail.com</li>
+        <li>Phone: +91-9440516707</li>
+    </ul>
+    <p>Provide your booking details including your name, email, booking date, and session type. Our team will review the request and respond promptly.</p>
+
+    <h2>Refund Processing</h2>
+    <p>Once a refund is approved, it will be processed using the original payment method. Please note that bank processing times may vary, and it may take several business days for the refund to appear in your account.</p>
+
+    <h2>Exceptions</h2>
+    <p>Refunds will not be issued for:</p>
+    <ul>
+        <li>Sessions that were completed as scheduled</li>
+        <li>Late arrivals or no-shows without prior notice</li>
+        <li>Change of mind after the session has been completed</li>
+    </ul>
+
+    <h2>Contact Us</h2>
+    <p>If you have any questions about this Refund Policy or need assistance with a refund request, please reach out to us using the contact details provided above. Our team will work with you to resolve any concerns in a fair and timely manner.</p>
+</div>
+{% endblock %}

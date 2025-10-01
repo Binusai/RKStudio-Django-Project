@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block title %}Automobile Photography | RK Studio{% endblock %}
+
+{% block styles %}
+<style>
+    body {
+        background-color: #111;
+        color: #f0f0f0;
+    }
+
+    .service-header {
+        text-align: center;
+        padding: 100px 20px 60px 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .service-header h1 {
+        font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
+        font-weight: 900;
+        /* Using a strong color, like a fiery orange or red, suits the auto theme */
+        color: #FF4500; /* Orangered */
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .service-header p {
+        font-size: 1.1rem;
+        color: #ccc; /* Lighter grey for readability on dark background */
+        line-height: 1.8;
+    }
+    
+    .filmstrip-gallery {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        height: 90vh;
+        background-color: #000;
+        cursor: grab;
+    }
+    .filmstrip-gallery:active {
+        cursor: grabbing;
+    }
+
+    .filmstrip-gallery img {
+        height: 100%;
+        width: auto;
+        object-fit: cover;
+        /* Aligns each image to the center when snapping */
+        scroll-snap-align: center;
+        flex-shrink: 0; /* Prevents images from shrinking */
+    }
+
+    .filmstrip-gallery::-webkit-scrollbar {
+        height: 8px;
+    }
+    .filmstrip-gallery::-webkit-scrollbar-track {
+        background: #000;
+    }
+    .filmstrip-gallery::-webkit-scrollbar-thumb {
+        background-color: #FF4500; /* Matching the accent color */
+        border-radius: 10px;
+    }
+    .booking-btn {
+    color: white;
+    background-color: #ff3b69; /* Base pink */
+    padding: 22px 45px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 25px;
+    display: inline-block; /* Always keeps button shape */
+    text-align: center;
+    transition: background-color 0.3s ease; /* Only animate bg, not padding/size */
+    min-width: 250px;
+    box-sizing: border-box; /* Prevents shrinking */
+}
+
+/* Hover */
+.booking-btn:hover {
+    background-color: #ff1a4d; /* Darker pink */
+    color: white;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .booking-btn {
+        font-size: 20px;
+        padding: 18px 35px;
+        min-width: 200px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .booking-btn {
+        font-size: 16px;
+        padding: 14px 25px;
+        min-width: 160px;
+    }
+}
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="service-header">
+        <h1>Automobile Photography</h1>
+        <p>
+            Automobile photography is an art form that blends engineering with aesthetics. Capturing the essence of a vehicle—from its sleek lines and powerful curves to the thrill of its performance—requires technical precision and a creative eye. At RK Studio, we specialize in creating dynamic, high-impact images that showcase a car's design and brand identity. Whether it's a static studio shoot, a dramatic rolling shot on the open road, or detailed close-ups, we produce stunning visuals that make every vehicle unforgettable.
+        </p>
+    </div>
+
+    <div class="filmstrip-gallery">
+        <img src="https://images.pexels.com/photos/3972755/pexels-photo-3972755.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sleek black sports car in a studio setting">
+        <img src="https://w0.peakpx.com/wallpaper/887/758/HD-wallpaper-royal-enfield-bullet-mountain-sky-sun-sunshine.jpg" alt="Dynamic rolling shot of a red car on a bridge">
+        <img src="https://images.pexels.com/photos/1545743/pexels-photo-1545743.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Close-up of a modern car's headlight with water droplets">
+        <img src="https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Front view of a white luxury car">
+        <img src="https://images.pexels.com/photos/909907/pexels-photo-909907.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Black sports car on an empty road at sunset">
+        <img src="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Vintage red car parked on a city street">
+    </div>
+<div class="container">
+    <div style="text-align: center; margin-top: 100px; margin-bottom: 100px;">
+        <a href="/booking" class="booking-btn"
+           onmouseover="this.style.backgroundColor='#ff1a4d';"
+           onmouseout="this.style.backgroundColor='#ff3b69';">
+            BOOK YOUR PHOTOSHOOT
+        </a>
+    </div>
+</div>
+
+
+</main>
+{% endblock %}

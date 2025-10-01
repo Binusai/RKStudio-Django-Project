@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<style>
+    .login-page-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(140vh - 500px); 
+        padding: 60px 0;
+    }
+
+    .login-container {
+        text-align: center;
+        background-color: var(--bg-dark-color, #1a1a1a); 
+        padding: 40px;
+        border-radius: var(--border-radius, 12px);
+        box-shadow: var(--shadow, 0 4px 20px rgba(0, 0, 0, 0.1));
+        width: 100%;
+        max-width: 480px;
+        border: 1px solid #333;
+        margin-bottom: 100px;
+    }
+
+    .login-container h2 {
+        margin-top: 0;
+        margin-bottom: 25px;
+        font-size: 24px;
+        color: var(--primary-color, #ffffff);
+    }
+
+    .password-input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #444;
+        background-color: #222;
+        color: #fff;
+        border-radius: 8px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .error-message {
+        color: #ff3b30;
+        height: 20px;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 12px;
+        background-color: var(--accent-color, #007aff);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: background-color 0.2s ease;
+    }
+
+    .login-btn:hover {
+        background-color: #005ecb;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <h1 style="text-align:center; color:#ff3b30; margin-top:140px;">
+        Only Admin's Can Access this. (Not For Users)
+    </h1>
+    <section class="login-page-section">
+        <div class="login-container">
+            <form method="POST" action="">
+                {% csrf_token %}
+                
+                <h2>Studio Access</h2>
+                
+                <input type="password" name="password" class="password-input" placeholder="Password" required>
+                
+                <p class="error-message">
+                    {% if error %}
+                        {{ error }}
+                    {% endif %}
+                </p>
+
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+        </div>
+    </section>
+</main>
+{% endblock %}

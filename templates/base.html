@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}RK Studio | Professional Photography Studio{% endblock %}</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #e3e3e3;
+            --background-dark: #0a0a0a;
+            --background-light: #121212;
+            --text-color: #cccccc;
+            --accent-color: #ff6b81;
+            --font-primary: 'Inter', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --border-radius: 8px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-primary);
+            color: var(--text-color);
+            background-color: var(--background-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .ic {
+            display:flex;
+            gap:15px;
+        }
+        .content-section {
+            padding: 100px 0;
+            position: relative;
+            z-index: 5;
+            background-color: var(--background-light);
+        }
+        .content-section.dark { background-color: var(--background-dark); }
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+        }
+        #header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-size: 24px; font-weight: 700; color: var(--primary-color); }
+        .nav-links { display: flex; gap: 35px; }
+        nav ul li { position: relative; display: inline-block; }
+        .nav-links a { font-size: 16px; font-weight: 500; color: var(--secondary-color); transition: var(--transition); }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary-color); }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: black;
+            min-width: 300px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            padding: 10px 0;
+            list-style: none;
+            margin-left: -100px;
+        }
+        .dropdown-menu li { display: block; }
+        .dropdown-menu a { color: white; padding: 2px 3.5px; display: block; text-align: center; }
+        .dropdown-menu a:hover { color: #ff1a53; }
+        li:hover > .dropdown-menu { display: block; }
+
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #footer { padding: 80px 0 40px; background-color: var(--background-dark); position: relative; z-index: 5; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 60px; }
+        .footer-grid h3, .footer-grid h4 { font-size: 20px; margin-bottom: 20px; color: var(--primary-color); }
+        .social-icons { display: flex; gap: 15px; margin-top: 15px; }
+        .social-icons a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background-color: #222; border-radius: 50%; transition: var(--transition); }
+        .social-icons a:hover { background-color: var(--accent-color); transform: translateY(-3px); }
+        .copyright { text-align: center; padding-top: 30px; border-top: 1px solid #333; color: #888; font-size: 14px; }
+        
+        .hamburger-toggle { display: none; }
+        .hamburger { display: none; cursor: pointer; z-index: 1001; }
+        .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: var(--transition); background-color: var(--primary-color); }
+        @media (max-width: 768px) {
+        .hamburger {
+            display: block;
+        }
+
+        .nav-links {
+            position: absolute;
+            top: 60px;   /* just below the header */
+            right: 20px; /* stick to right side */
+            width: 220px;
+            background-color: var(--background-dark);
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 15px 20px;
+            gap: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            display: none;  /* hidden by default */
+        }
+
+        #hamburger-toggle:checked + label + nav .nav-links {
+            display: flex; /* show when toggled */
+        }
+
+        /* animate hamburger to "X" */
+        #hamburger-toggle:checked + label .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        #hamburger-toggle:checked + label .bar:nth-child(2) {
+            opacity: 0;
+        }
+        #hamburger-toggle:checked + label .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+    }
+
+
+    </style>
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <h1 class="logo">RK Studio</h1>
+            <input type="checkbox" id="hamburger-toggle" style="display: none;">
+            <label for="hamburger-toggle" class="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </label>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="/" class="active">Home</a></li>
+                    <li>
+                        <a href="#services">Services</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Jewelry/">Jewelry Photography</a></li>
+                            <li><a href="/Portrait/">Portrait Photography</a></li>
+                            <li><a href="/Frames/">Photo Frames</a></li>
+                            <li><a href="/Marriage/">Wedding Photography</a></li>
+                            <li><a href="/Birthday/">Birthday Photography</a></li>
+                            <li><a href="/PreWedding/">Pre-Wedding Shoots</a></li>
+                            <li><a href="/Clothing/">Clothing & Fashion Photography</a></li>
+                            <li><a href="/AutoMobile/">Auto-Mobile Photography</a></li>
+                            <li><a href="/Business/">Business & Professional</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/booking/">Online Booking</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                 <div class="footer-info">
+                     <h3>RK Studio</h3>
+                     <p>Premium Photography Studio in Chittoor</p>
+                 </div>
+                 <div class="footer-contact">
+                     <h4>Contact Us</h4>
+                     <p><i class="fab fa-whatsapp"></i> WhatsApp: +91 94405-16707</p>
+                     <p><i class="far fa-envelope"></i> Email: rkdigitalfashionstudio@gmail.com</p>
+                     <div class="ic">
+                     <div class="social-icons">
+                         <a href="https://www.instagram.com/rk_fashion_studio2/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                     </div>
+                     <div class="social-icons">
+                         <a href="https://www.youtube.com/@rkfashionstudioctr905" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+                     </div>
+                    </div>
+                 </div>
+                 <div class="footer-links">
+                     <h4>Quick Links</h4>
+                     <ul>
+                         <li><a href="/Privacy/" style="color:#ff1a53;">Privacy Policy</a></li>
+                         <li><a href="/Refund/" style="color:#ff1a53;">Refund Policy</a></li>
+                     </ul>
+                 </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 RK Studio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<style>
+    .dashboard-container {
+        padding: 60px 0;
+        color: var(--primary-color, #fff);
+    }
+
+    .dashboard-title {
+        text-align: center;
+        margin-bottom: 60px;
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    .booking-section-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color, #007aff);
+    }
+
+    .bookings-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+    }
+
+    .booking-card {
+        background-color: #2a2a2e; 
+        border: 1px solid #444;
+        padding: 25px;
+        border-radius: var(--border-radius, 12px);
+        box-shadow: var(--shadow, 0 4px 20px rgba(0, 0, 0, 0.1));
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .booking-card h3 {
+        font-size: 1.4rem;
+        margin-top: 0;
+        margin-bottom: 15px;
+        color: var(--primary-color, #fff);
+    }
+
+    .booking-card p {
+        margin: 5px 0;
+        color: #ccc;
+        line-height: 1.6;
+    }
+    .booking-card p strong {
+        color: #eee;
+    }
+
+    .booking-actions {
+        margin-top: 20px;
+    }
+
+    .booking-actions form {
+        display: flex;
+        gap: 10px;
+    }
+
+    .action-btn {
+        flex-grow: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+
+    .btn-accept {
+        background-color: #34c759; /* Green */
+        color: white;
+    }
+    .btn-accept:hover {
+        background-color: #2ca54b;
+        transform: translateY(-2px);
+    }
+
+    .btn-reject {
+        background-color: #ff3b30; /* Red */
+        color: white;
+    }
+    .btn-reject:hover {
+        background-color: #d93229;
+        transform: translateY(-2px);
+    }
+    .btn-delete {
+    display: block;
+    margin: 10px auto 0 auto;
+    padding: 10px 20px;
+    background-color: #ffffff;  
+    color: #000000;           
+    border: 1px solid #333;    
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    
+    }
+
+    .btn-delete:hover {
+        background-color: #f0f0f0;  
+        color: #000000;
+    }
+
+    .status-badge {
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: white;
+        margin-top: 20px;
+        text-align: center;
+    }
+    .status-accepted {
+        background-color: #34c759;
+    }
+    .status-rejected {
+        background-color: #ff3b30;
+    }
+    
+    .no-bookings-message {
+        background-color: #2a2a2e;
+        padding: 20px;
+        border-radius: var(--border-radius, 12px);
+        text-align: center;
+        color: #888;
+        grid-column: 1 / -1; /* Span full width of grid */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="dashboard-container container">
+        <h1 class="dashboard-title">Admin Dashboard</h1>
+
+        <section id="pending-bookings">
+            <h2 class="booking-section-title">Pending Bookings</h2>
+            <div class="bookings-grid">
+                {% for booking in bookings %}
+                    {% if booking.status == 'Pending' %}
+                    <div class="booking-card">
+                        <div class="booking-details">
+                            <h3>{{ booking.name }}</h3>
+                            <p><strong>Session-Type:</strong> {{ booking.session_type }}</p>
+                            <p><strong>Email:</strong> {{ booking.email }}</p>
+                            <p><strong>Date:</strong> {{ booking.date|date:"F d, Y" }}</p>
+                            <p><strong>Time:</strong> {{ booking.time|time:"h:i A" }}</p>
+                        </div>
+                        <div class="booking-actions">
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                <input type="hidden" name="booking_id" value="{{ booking.id }}">
+                                <button type="submit" name="action" value="accept" class="action-btn btn-accept">Accept</button>
+                                <button type="submit" name="action" value="reject" class="action-btn btn-reject">Reject</button>
+                            </form>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% empty %}
+                    <p class="no-bookings-message">No pending bookings at the moment.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="accepted-bookings">
+            <h2 class="booking-section-title">Upcoming / Accepted Bookings</h2>
+            <div class="bookings-grid">
+                {% for booking in bookings %}
+                    {% if booking.status == 'Accepted' %}
+                    <div class="booking-card">
+                        <div class="booking-details">
+                            <h3>{{ booking.name }}</h3>
+                            <p><strong>Session-Type:</strong> {{ booking.session_type }}</p>
+                            <p><strong>Email:</strong> {{ booking.email }}</p>
+                            <p><strong>Date:</strong> {{ booking.date|date:"F d, Y" }}</p>
+                            <p><strong>Time:</strong> {{ booking.time|time:"h:i A" }}</p>
+                        </div>
+                        <div class="status-badge status-accepted">Accepted</div>
+                        <form method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="booking_id" value="{{ booking.id }}">
+                        <button type="submit" name="action" value="delete" class="action-btn btn-delete">Delete</button>
+                    </form>
+                    </div>
+
+                    {% endif %}
+                {% empty %}
+                    <p class="no-bookings-message">No upcoming bookings.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="rejected-bookings">
+            <h2 class="booking-section-title">Rejected Bookings</h2>
+            <div class="bookings-grid">
+                {% for booking in bookings %}
+                    {% if booking.status == 'Rejected' %}
+                    <div class="booking-card">
+                        <div class="booking-details">
+                            <h3>{{ booking.name }}</h3>
+                            <p><strong>Session-Type:</strong> {{ booking.session_type }}</p>
+                            <p><strong>Email:</strong> {{ booking.email }}</p>
+                            <p><strong>Date:</strong> {{ booking.date|date:"F d, Y" }}</p>
+                            <p><strong>Time:</strong> {{ booking.time|time:"h:i A" }}</p>
+                        </div>
+                        <div class="status-badge status-rejected">Rejected</div>
+                        <form method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="booking_id" value="{{ booking.id }}">
+                        <button type="submit" name="action" value="delete" class="action-btn btn-delete">Delete</button>
+                    </form>
+                    </div>
+                    {% endif %}
+                {% empty %}
+                    <p class="no-bookings-message">No rejected bookings found.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+    </div>
+</main>
+{% endblock %}
+

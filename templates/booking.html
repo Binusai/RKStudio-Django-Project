@@ -1,0 +1,257 @@
+{% extends 'base.html'%}
+{% block styles %}
+    <style>
+        /* --- THEME & GLOBAL STYLES (MATCHES OTHER PAGES) --- */
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #e3e3e3;
+            --background-dark: #0a0a0a;
+            --background-light: #121212;
+            --text-color: #cccccc;
+            --accent-color: #ff3b69; /* Use your brand's pink */
+            --accent-hover: #ff1a53;
+            --success-color: #4CAF50;
+            --font-primary: 'Inter', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --border-radius: 8px;
+        }
+
+        /* --- BOOKING SECTION --- */
+        #booking {
+            padding: 100px 0;
+            min-height: calc(100vh - 160px); /* Adjust for header/footer */
+            display: flex;
+            align-items: center;
+        }
+
+        .booking-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        .booking-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--background-dark);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid #222;
+        }
+
+        .booking-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #333;
+            border-radius: var(--border-radius);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--background-light);
+            color: var(--primary-color);
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(255, 59, 105, 0.2);
+        }
+
+        /* Style for date/time picker icon */
+        input[type="date"]::-webkit-calendar-picker-indicator,
+        input[type="time"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+
+        .btn-booking {
+            grid-column: 1 / -1;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: var(--border-radius);
+            font-weight: 700;
+            text-align: center;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-top: 15px;
+        }
+
+        .btn-booking:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 59, 105, 0.2);
+        }
+
+        /* --- PURE CSS SUCCESS MODAL --- */
+        .success-message {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0s 0.4s;
+        }
+        
+        /* Show modal when it's the target in the URL */
+        .success-message:target {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.4s ease;
+        }
+
+        .success-content {
+            background-color: var(--background-dark);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid #222;
+            box-shadow: var(--shadow);
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .success-message:target .success-content {
+            transform: scale(1);
+        }
+
+        .success-content i {
+            font-size: 4rem;
+            color: var(--success-color);
+            margin-bottom: 20px;
+        }
+
+        .success-content h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .success-content p {
+            margin-bottom: 25px;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+        }
+        
+        .close-message {
+            display: inline-block;
+            background-color: #333;
+            color: var(--white);
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .close-message:hover {
+            background-color: #444;
+        }
+
+        /* --- RESPONSIVE STYLES --- */
+        @media (max-width: 768px) {
+            .booking-title { font-size: 2.25rem; }
+            .booking-container { padding: 30px; }
+            .booking-form { grid-template-columns: 1fr; gap: 20px; }
+            .nav-links { display: none; } /* Add CSS nav later if needed */
+        }
+
+    </style>
+    {% endblock %}
+
+{% block content %}
+
+
+    <main>
+        <section id="booking">
+            <div class="container">
+                <h1 class="booking-title">Online Booking</h1>
+                <div class="booking-container">
+                    <form id="booking-form" class="booking-form" action="{% url 'booking' %}" method="post">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="session_type">Photo Session Type</label>
+                            <select id="session_type" name="session_type" required>
+                                <option value="" disabled selected>Select a session type</option>
+                                <option value="jewelry">Jewelry Photography</option>
+                                <option value="portrait">Portrait Photography</option>
+                                <option value="wedding">Wedding Photography</option>
+                                <option value="birthday">Birthday Photography</option>
+                                <option value="pre_wedding">Pre-Wedding Shoots</option>
+                                <option value="clothing_fashion">Clothing & Fashion Photography</option>
+                                <option value="automobile">Auto-Mobile Photography</option>
+                                <option value="business_professional">Business & Professional</option>
+
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" name="date" required min="2025-08-01">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <input type="time" id="time" name="time" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number (optional)</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <button type="submit" class="btn-booking">Book Photoshoot</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="success-message" class="success-message">
+        <div class="success-content">
+            <i class="fas fa-check-circle"></i>
+            <h2>Booking Submitted!</h2>
+            <p>Thank you for your request. We'll contact you shortly via email to confirm your appointment details.</p>
+            <a href="{% url 'home' %}" class="close-message">Close</a>
+        </div>
+    </div>
+    </body>
+{% endblock %}

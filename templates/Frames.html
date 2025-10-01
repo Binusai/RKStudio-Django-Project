@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+
+{% block title %}Photo Frames | RK Studio{% endblock %}
+
+{% block styles %}
+<style>
+    body {
+        background-color: #111;
+        color: #f0f0f0;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .service-header {
+        text-align: center;
+        padding: 80px 20px 60px 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .service-header h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 900;
+        color: #E0A800;
+        margin-bottom: 20px;
+    }
+
+    .service-header p {
+        font-size: 1.1rem;
+        color: #ccc;
+        line-height: 1.8;
+    }
+
+    .frames-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto 100px auto;
+    }
+
+    .frame-card {
+        width: 300px;
+        background-color: #1a1a1a;
+        padding: 15px;
+        border-radius: 4px;
+        border: 1px solid #333;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.25);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .frame-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .frame-card h3 {
+        margin: 15px 0 5px 0;
+        font-size: 1.2rem;
+        color: #f0f0f0;
+    }
+
+    .frame-card p {
+        font-size: 0.9rem;
+        color: #aaa;
+        line-height: 1.5;
+    }
+
+    .frame-card:nth-child(1) {
+        transform: rotate(-3deg);
+    }
+    .frame-card:nth-child(2) {
+        transform: rotate(2.5deg);
+        margin-top: 50px;
+    }
+    .frame-card:nth-child(3) {
+        transform: rotate(-2deg);
+        margin-top: -30px;
+    }
+    .frame-card:nth-child(4) {
+        transform: rotate(3.5deg);
+        margin-top: 30px;
+    }
+    .frame-card:nth-child(5) {
+        transform: rotate(-1.5deg);
+        margin-top: -40px;
+    }
+     .frame-card:nth-child(6) {
+        transform: rotate(2deg);
+        margin-top: 60px;
+    }
+
+    .frame-card:hover {
+        transform: rotate(0deg) scale(1.05);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        z-index: 10;
+    }
+
+    @media (max-width: 768px) {
+        .frames-container {
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        .frame-card,
+        .frame-card:nth-child(1),
+        .frame-card:nth-child(2),
+        .frame-card:nth-child(3),
+        .frame-card:nth-child(4),
+        .frame-card:nth-child(5),
+        .frame-card:nth-child(6) {
+            transform: none;
+            margin-top: 0;
+        }
+
+        .frame-card:hover {
+            transform: scale(1.05);
+        }
+    }
+    .booking-btn {
+    color: white;
+    background-color: #ff3b69; /* Base pink */
+    padding: 22px 45px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 25px;
+    display: inline-block; /* Always keeps button shape */
+    text-align: center;
+    transition: background-color 0.3s ease; /* Only animate bg, not padding/size */
+    min-width: 250px;
+    box-sizing: border-box; /* Prevents shrinking */
+}
+
+.booking-btn:hover {
+    background-color: #ff1a4d; /* Darker pink */
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .booking-btn {
+        font-size: 20px;
+        padding: 18px 35px;
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .booking-btn {
+        font-size: 16px;
+        padding: 14px 25px;
+        min-width: 160px;
+    }
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="service-header">
+        <h1>Custom Photo Frames</h1>
+        <p>
+            The perfect photograph deserves the perfect frame. We offer a curated selection of high-quality frames to complement your cherished memories and enhance your home decor. Explore our collection to find the ideal match for your style, from timeless classics to modern minimalist designs.
+        </p>
+    </div>
+
+    <div class="frames-container">
+        <div class="frame-card">
+            <img src="https://i.ibb.co/Pz9MW05s/Screenshot-2025-09-30-002422.png" alt="A classic wooden photo frame with a landscape picture inside.">
+            <h3>Classic Wooden Frame</h3>
+            <p>Timeless and versatile, our oak and walnut frames bring natural warmth to any photo.</p>
+        </div>
+
+        <div class="frame-card">
+            <img src="https://cdn.shopify.com/s/files/1/0623/4688/7385/files/metal_frames_480x480.jpg?v=1710979653" alt="A sleek, thin black metal frame around a portrait.">
+            <h3>Modern Metallic Frame</h3>
+            <p>Sleek and minimalist. Perfect for contemporary decor with a clean, polished finish.</p>
+        </div>
+        
+        <div class="frame-card">
+            <img src="https://ommiv.com/cdn/shop/files/HD7_Black_Side_View_mockup_output_7_8032d3dd-d3dd-4efa-a238-8fb84b7a3e1b.jpg?v=1744811033&width=1946" alt="A decorative frame holding a sacred image of a deity.">
+            <h3>Sacred Art Frames</h3>
+            <p>Elegantly crafted frames designed to honor and display sacred images and deities.</p>
+        </div>
+
+        <div class="frame-card">
+            <img src="https://profileproducts.com.au/cdn/shop/files/shop-profile-balanced-gallery-photo-wall-frame-set-8-frames-white-gallery-wall-frame-set-e-from-our-collection-of-australian-made-picture-frames-by-profile-products-australia-pty-ltd-1140572418_1800x1800.jpg?v=1740514432" alt="A set of multiple frames arranged on a wall.">
+            <h3>Gallery Wall Set</h3>
+            <p>Curate your story with a matched set of frames, ready to create a stunning gallery wall.</p>
+        </div>
+
+        <div class="frame-card">
+            <img src="https://i.ibb.co/1GVDyH8y/Screenshot-2025-09-30-003621.png" alt="A photo sandwiched between two clear acrylic panels.">
+            <h3>Floating Acrylic Frame</h3>
+            <p>A frameless, modern look that makes your photo appear to float on the wall.</p>
+        </div>
+
+        <div class="frame-card">
+            <img src="https://i.ibb.co/qFkQgrvP/colage-frame2-1000x1000.png" alt="A large frame with openings for multiple photos.">
+            <h3>Multi-Photo Collage</h3>
+            <p>Showcase multiple memories in one place. Ideal for family photos and special events.</p>
+        </div>
+    </div>
+<div class="container">
+    <div style="text-align: center; margin-top: 100px; margin-bottom: 100px;">
+        <a href="/booking" class="booking-btn"
+           onmouseover="this.style.backgroundColor='#ff1a4d';"
+           onmouseout="this.style.backgroundColor='#ff3b69';">
+            BOOK YOUR PHOTOSHOOT
+        </a>
+    </div>
+</div>
+</main>
+{% endblock %}

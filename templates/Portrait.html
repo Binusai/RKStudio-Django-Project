@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block title %}Jewellery Photography | RK Studio{% endblock %}
+
+{% block styles %}
+<style>
+    /* Styles for the top descriptive section */
+    .service-header {
+        text-align: center;
+        padding: 100px 20px 60px 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .service-header h1 {
+        font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
+        font-weight: 900;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .service-header p {
+        font-size: 1.1rem;
+        color: var(--text-color);
+        line-height: 1.8;
+    }
+    
+    .filmstrip-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+        background-color: #000;
+        max-width: 100%;   /* keep inside screen */
+    }
+
+    .filmstrip-gallery img {
+        width: 100%;
+        height: auto;      /* don’t force shrink */
+        object-fit: cover;
+        display: block;
+    }
+
+    @media (max-width: 768px) {
+        .filmstrip-gallery {
+            transform: scale(0.85);
+            transform-origin: top center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .filmstrip-gallery {
+            transform: scale(0.65);
+            transform-origin: top center;
+        }
+    }
+
+
+    .filmstrip-gallery::-webkit-scrollbar {
+        height: 8px;
+    }
+    .filmstrip-gallery::-webkit-scrollbar-track {
+        background: #000;
+    }
+    .filmstrip-gallery::-webkit-scrollbar-thumb {
+        background-color: var(--accent-color);
+        border-radius: 10px;
+    }
+    .booking-btn {
+    color: white;
+    background-color: #ff3b69; /* Base pink */
+    padding: 22px 45px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 25px;
+    display: inline-block; /* Always keeps button shape */
+    text-align: center;
+    transition: background-color 0.3s ease; /* Only animate bg, not padding/size */
+    min-width: 250px;
+    box-sizing: border-box; /* Prevents shrinking */
+}
+
+.booking-btn:hover {
+    background-color: #ff1a4d; /* Darker pink */
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .booking-btn {
+        font-size: 20px;
+        padding: 18px 35px;
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .booking-btn {
+        font-size: 16px;
+        padding: 14px 25px;
+        min-width: 160px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="service-header">
+        <h1>Portrait Photography</h1>
+        <p>
+            Capturing a great portrait is more than just clicking a picture—it’s about bringing out personality and emotion in every frame. At RK Studio, we focus on making our clients feel comfortable and natural so their true character shines through. From subtle lighting setups to carefully chosen backdrops, we pay attention to every detail to highlight expressions, moods, and unique features. Whether it’s a solo portrait, a family moment, or a professional headshot, our approach creates warm, timeless images that feel genuine and memorable.
+        </p>
+    </div>
+
+    <div class="filmstrip-gallery">
+        <img src="https://i.ibb.co/kskhQM1X/1.png" alt="Jewellery Photography 1">
+        <img src="https://i.ibb.co/XrLPZHmm/2.png" alt="Jewellery Photography 2">
+        <img src="https://i.ibb.co/JwkBhMZw/3.png" alt="Jewellery Photography 3">
+        <img src="https://i.ibb.co/4ggS1wms/4.png" alt="Jewellery Photography 4">
+        <img src="https://i.ibb.co/BVKgQ7tT/5.png" alt="Jewellery Photography 5">
+        <img src="https://i.ibb.co/mrx7MVNm/6.png" alt="Jewellery Photography 6">
+        <img src="https://i.ibb.co/h1wXWK1W/7.png" alt="Jewellery Photography 7">
+        <img src="https://i.ibb.co/WNBGP84G/8.png" alt="Jewellery Photography 8">
+        <img src="https://i.ibb.co/3yGxcVdX/9.png" alt="Jewellery Photography 9">
+    </div>
+<div class="container">
+    <div style="text-align: center; margin-top: 100px; margin-bottom: 100px;">
+        <a href="/booking" class="booking-btn"
+           onmouseover="this.style.backgroundColor='#ff1a4d';"
+           onmouseout="this.style.backgroundColor='#ff3b69';">
+            BOOK YOUR PHOTOSHOOT
+        </a>
+    </div>
+</div>
+</main>
+{% endblock %}

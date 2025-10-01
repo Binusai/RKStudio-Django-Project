@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %}Jewellery Photography | RK Studio{% endblock %}
+
+{% block styles %}
+<style>
+    .service-header {
+        text-align: center;
+        padding: 100px 20px 60px 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .service-header h1 {
+        font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
+        font-weight: 900;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .service-header p {
+        font-size: 1.1rem;
+        color: var(--text-color);
+        line-height: 1.8;
+    }
+    
+    .filmstrip-gallery {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        height: 90vh;
+        background-color: #000;
+        cursor: grab;
+    }
+    .filmstrip-gallery:active {
+        cursor: grabbing;
+    }
+
+    .filmstrip-gallery img {
+        height: 100%;
+        width: auto;
+        object-fit: cover;
+        /* Aligns each image to the center when snapping */
+        scroll-snap-align: center;
+        flex-shrink: 0; /* Prevents images from shrinking */
+    }
+
+    /* Custom scrollbar for a cleaner look */
+    .filmstrip-gallery::-webkit-scrollbar {
+        height: 8px;
+    }
+    .filmstrip-gallery::-webkit-scrollbar-track {
+        background: #000;
+    }
+    .filmstrip-gallery::-webkit-scrollbar-thumb {
+        background-color: var(--accent-color);
+        border-radius: 10px;
+    }
+    .booking-btn {
+    color: white;
+    background-color: #ff3b69; /* Base pink */
+    padding: 22px 45px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 25px;
+    display: inline-block; /* Always keeps button shape */
+    text-align: center;
+    transition: background-color 0.3s ease; /* Only animate bg, not padding/size */
+    min-width: 250px;
+    box-sizing: border-box; /* Prevents shrinking */
+}
+
+.booking-btn:hover {
+    background-color: #ff1a4d; /* Darker pink */
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .booking-btn {
+        font-size: 20px;
+        padding: 18px 35px;
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .booking-btn {
+        font-size: 16px;
+        padding: 14px 25px;
+        min-width: 160px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="service-header">
+        <h1>Jewellery Photography</h1>
+        <p>
+            Photographing Jewelry can be challenging and time-consuming, due to its reflective surfaces. The diverse range of Indian Jewellery adds to the complexity of the photography work, as each Jewellery type necessitates a unique Photography setup for best results. Jewellery Photography by RK STUDIO uses unique techniques that bring out the shine in the metal and the shimmer in the gemstones, producing crisp, clear details that elegantly display the craftsmanship and design of every jewellery piece in a creative style.
+        </p>
+    </div>
+
+    <div class="filmstrip-gallery">
+        <img src="https://www.tarinika.in/cdn/shop/articles/Cover_image.jpg?v=1627068596" alt="Jewellery Photography 1">
+        <img src="https://cdn.shopify.com/s/files/1/0507/9865/7726/files/Buy-Gold-Choker-Designs_1024x1024.jpg?v=1681116648" alt="Jewellery Photography 2">
+        <img src="https://i.ibb.co/23BHhtrB/Screenshot-2025-08-02-222841.png" alt="Jewellery Photography 3">
+        <img src="https://arshis.in/cdn/shop/collections/Picsart_23-05-28_01-46-40-852_1.jpg?v=1721893956&width=1500" alt="Jewellery Photography 4">
+        <img src="https://i.ibb.co/VpcH9sTW/Screenshot-2025-08-02-223032.png" alt="Jewellery Photography 5">
+        <img src="https://i.ibb.co/4rcdwBy/Screenshot-2025-08-02-224333.png" alt="Jewellery Photography 6">
+    </div>
+<div class="container">
+    <div style="text-align: center; margin-top: 100px; margin-bottom: 100px;">
+        <a href="/booking" class="booking-btn"
+           onmouseover="this.style.backgroundColor='#ff1a4d';"
+           onmouseout="this.style.backgroundColor='#ff3b69';">
+            BOOK YOUR PHOTOSHOOT
+        </a>
+    </div>
+</div>
+</main>
+{% endblock %}

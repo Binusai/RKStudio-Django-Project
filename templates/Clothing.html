@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}Clothing & Fashion Photography | RK Studio{% endblock %}
+
+{% block styles %}
+<style>
+    body {
+        background-color: #111;
+        color: #f0f0f0;
+    }
+
+    .service-header {
+        text-align: center;
+        padding: 100px 20px 60px 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .service-header h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 900;
+        /* A clean, crisp white for a high-fashion aesthetic */
+        color: #FFFFFF;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .service-header p {
+        font-size: 1.1rem;
+        color: #ccc;
+        line-height: 1.8;
+    }
+    
+    .filmstrip-gallery {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        height: 90vh;
+        background-color: #000;
+        cursor: grab;
+    }
+    .filmstrip-gallery:active {
+        cursor: grabbing;
+    }
+
+    .filmstrip-gallery img {
+        height: 100%;
+        width: auto;
+        object-fit: cover;
+        scroll-snap-align: center;
+        flex-shrink: 0;
+    }
+
+    /* Custom scrollbar with matching white accent */
+    .filmstrip-gallery::-webkit-scrollbar {
+        height: 8px;
+    }
+    .filmstrip-gallery::-webkit-scrollbar-track {
+        background: #000;
+    }
+    .filmstrip-gallery::-webkit-scrollbar-thumb {
+        background-color: #FFFFFF;
+        border-radius: 10px;
+    }
+    .booking-btn {
+    color: white;
+    background-color: #ff3b69; /* Base pink */
+    padding: 22px 45px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 25px;
+    display: inline-block; /* Always keeps button shape */
+    text-align: center;
+    transition: background-color 0.3s ease; /* Only animate bg, not padding/size */
+    min-width: 250px;
+    box-sizing: border-box; /* Prevents shrinking */
+}
+
+/* Hover */
+.booking-btn:hover {
+    background-color: #ff1a4d; /* Darker pink */
+    color: white;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .booking-btn {
+        font-size: 20px;
+        padding: 18px 35px;
+        min-width: 200px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .booking-btn {
+        font-size: 16px;
+        padding: 14px 25px;
+        min-width: 160px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="service-header">
+        <h1>Clothing & Fashion Photography</h1>
+        <p>
+            Fashion photography is more than just showcasing clothing; it's about telling a story and creating a mood. From high-fashion editorials to clean e-commerce lookbooks, we capture the essence of your brand's identity. Our focus is on the details—the texture of the fabric, the silhouette of the design, and the personality of the model—to create compelling images that resonate with your audience. At RK Studio, we translate your creative vision into striking visuals that sell not just a product, but a lifestyle.
+        </p>
+    </div>
+
+    <div class="filmstrip-gallery">
+        <img src="https://i.ibb.co/Hf5LzR0r/cloth.png" alt="Male model in a stylish suit posing in a modern architectural setting">
+        <img src="https://www.lashkaraa.com/cdn/shop/articles/indian-outfits-women.jpg?v=1686585849&width=2048" alt="Female model in a white dress against a clean studio background">
+        <img src="https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Street style shot of a person in trendy urban fashion">
+        <img src="https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Close-up detail shot of high-quality leather shoes and folded trousers">
+        <img src="https://i.ibb.co/7N8kCh6b/426484767-273490758952045-170183.png" alt="Model wearing elaborate traditional Indian bridal wear by Sabyasachi">
+        <img src="https://images.pexels.com/photos/7679664/pexels-photo-7679664.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="High fashion editorial shot with a model in a dramatic pose">
+    </div>
+<div class="container">
+    <div style="text-align: center; margin-top: 100px; margin-bottom: 100px;">
+        <a href="/booking" class="booking-btn"
+           onmouseover="this.style.backgroundColor='#ff1a4d';"
+           onmouseout="this.style.backgroundColor='#ff3b69';">
+            BOOK YOUR PHOTOSHOOT
+        </a>
+    </div>
+</div>
+</main>
+{% endblock %}

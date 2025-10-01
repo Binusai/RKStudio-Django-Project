@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block title %}Birthday Photography | RK Studio{% endblock %}
+
+{% block styles %}
+<style>
+    body {
+        background-color: #111;
+        color: #f0f0f0; 
+    }
+
+    .service-header {
+        text-align: center;
+        padding: 100px 20px 60px 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    .service-header h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 900;
+        color: #187ab7ff; 
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .service-header p {
+        font-size: 1.1rem;
+        color: #ccc;
+        line-height: 1.8;
+    }
+    
+    .filmstrip-gallery {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        height: 90vh;
+        background-color: #000;
+        cursor: grab;
+        position: relative;
+        z-index: 2;
+        border-top: 2px solid #187ab7ff; 
+        border-bottom: 2px solid #187ab7ff;
+    }
+    .filmstrip-gallery:active {
+        cursor: grabbing;
+    }
+
+    .filmstrip-gallery img,
+    .filmstrip-gallery video {
+        height: 100%;
+        width: auto;
+        object-fit: cover;
+        scroll-snap-align: center;
+        flex-shrink: 0; 
+    }
+
+    .filmstrip-gallery::-webkit-scrollbar {
+        height: 8px;
+    }
+    .filmstrip-gallery::-webkit-scrollbar-track {
+        background: #000;
+    }
+    .filmstrip-gallery::-webkit-scrollbar-thumb {
+        background-color: #187ab7ff;
+        border-radius: 10px;
+    }
+
+    .sparkle-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .sparkle {
+        position: absolute;
+        background-color: #187ab7ff;
+        border-radius: 50%;
+        opacity: 0;
+        animation: sparkle-animation 15s linear infinite;
+    }
+
+    .booking-btn {
+    color: white;
+    background-color: #ff3b69; /* Base pink */
+    padding: 22px 45px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 25px;
+    display: inline-block; /* Always keeps button shape */
+    text-align: center;
+    transition: background-color 0.3s ease; /* Only animate bg, not padding/size */
+    min-width: 250px;
+    box-sizing: border-box; /* Prevents shrinking */
+}
+
+/* Hover */
+.booking-btn:hover {
+    background-color: #ff1a4d; /* Darker pink */
+    color: white;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .booking-btn {
+        font-size: 20px;
+        padding: 18px 35px;
+        min-width: 200px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .booking-btn {
+        font-size: 16px;
+        padding: 14px 25px;
+        min-width: 160px;
+    }
+}
+
+    @keyframes sparkle-animation {
+        0% {
+            transform: translateY(0) scale(0);
+            opacity: 0.5;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) scale(1);
+            opacity: 0;
+        }
+    }
+
+    .sparkle:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; width: 3px; height: 3px; }
+    .sparkle:nth-child(2) { top: 80%; left: 30%; animation-delay: -3s; width: 1px; height: 1px; }
+    .sparkle:nth-child(3) { top: 50%; left: 90%; animation-delay: -8s; width: 2px; height: 2px; }
+    .sparkle:nth-child(4) { top: 90%; left: 70%; animation-delay: -5s; width: 3px; height: 3px; }
+    .sparkle:nth-child(5) { top: 10%; left: 60%; animation-delay: -12s; width: 1px; height: 1px; }
+    .sparkle:nth-child(6) { top: 40%; left: 5%; animation-delay: -1s; width: 2px; height: 2px; }
+    .sparkle:nth-child(7) { top: 60%; left: 50%; animation-delay: -10s; width: 3px; height: 3px; }
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="sparkle-container">
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+</div>
+
+<main>
+    <div class="service-header">
+        <h1>Birthday Photography</h1>
+        <p>
+            From the joy of a first birthday cake smash to the milestone celebration of a 50th, every birthday is a unique story waiting to be told. At RK Studio, we specialize in capturing the vibrant energy and candid moments of your celebration. We focus on the laughter, the surprises, and the heartfelt connections, creating a beautiful collection of memories that you and your loved ones will treasure for years to come. Let us turn your fleeting moments into timeless keepsakes.
+        </p>
+    </div>
+
+    <div class="filmstrip-gallery">
+        <img src="https://i.ibb.co/99x9hdxc/1.png" alt="Jewellery Photography 1">
+        <img src="https://i.ibb.co/3YmjrFXz/2.png" alt="Jewellery Photography 2">
+        <img src="https://i.ibb.co/TM93Tqsc/3.png" alt="Jewellery Photography 3">
+        <img src="https://i.ibb.co/2Y5Bb881/4.png" alt="Jewellery Photography 4">
+        <img src="https://i.ibb.co/PsVqpDcF/5.png" alt="Jewellery Photography 5">
+        <img src="https://i.ibb.co/WpG3j4gZ/6.png" alt="Jewellery Photography 6">
+    </div>
+<div class="container">
+    <div style="text-align: center; margin-top: 100px; margin-bottom: 100px;">
+        <a href="/booking" class="booking-btn"
+           onmouseover="this.style.backgroundColor='#ff1a4d';"
+           onmouseout="this.style.backgroundColor='#ff3b69';">
+            BOOK YOUR PHOTOSHOOT
+        </a>
+    </div>
+</div>
+</main>
+{% endblock %}
