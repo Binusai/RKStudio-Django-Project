@@ -12,8 +12,13 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-for-local")
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 # Hosts allowed in production
-ALLOWED_HOSTS = ['.onrender.com', 'rkfashionstudio.publicvm.com']
-
+ALLOWED_HOSTS = [
+    '.onrender.com',                 # Render preview URL
+    'rkfashionstudio.online',        # Your custom domain
+    'www.rkfashionstudio.online',    # With www
+    '127.0.0.1',                     # Localhost
+    'localhost',                     # Localhost
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -24,12 +29,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'booking',
-    'Dashboard','Mainapp',
+    'Dashboard',
+    'Mainapp',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # <-- added WhiteNoise here
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # For static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -82,17 +88,26 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
+
+# Email settings - Brevo SMTP (works on localhost and Render)
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp-relay.brevo.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'rkdigitalfashionstudio@gmail.com'
-EMAIL_HOST_PASSWORD = 'kjzlpxriycgljcls'
-DEFAULT_FROM_EMAIL = "RK Studio <rkdigitalfashionstudio@gmail.com>"
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get("BREVO_EMAIL_USER", "your-brevo-login@example.com")
+EMAIL_HOST_PASSWORD = os.environ.get("BREVO_EMAIL_PASSWORD", "your-brevo-smtp-key")
+DEFAULT_FROM_EMAIL = "RK Fashion Studio <rkdigitalfashionstudio@gmail.com>"
+
+# Optional: fallback for local testing with Gmail (only use locally!)
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = "smtp.gmail.com"
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = os.environ.get("GMAIL_USER", "rkdigitalfashionstudio@gmail.com")
+    EMAIL_HOST_PASSWORD = os.environ.get("GMAIL_PASS", "your-gmail-app-password")
